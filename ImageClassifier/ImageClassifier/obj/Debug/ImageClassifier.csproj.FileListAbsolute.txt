@@ -1,0 +1,15 @@
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\bin\Debug\ImageClassifier.exe.config
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\bin\Debug\ImageClassifier.exe
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\bin\Debug\ImageClassifier.pdb
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.csprojResolveAssemblyReference.cache
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\MainWindow.g.cs
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\App.g.cs
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier_MarkupCompile.cache
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier_MarkupCompile.lref
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\MainWindow.baml
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.g.resources
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.Properties.Resources.resources
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.csproj.GenerateResource.Cache
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.csproj.CoreCompileInputs.cache
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.exe
+C:\Users\Андрей\source\repos\ImageClassifier\ImageClassifier\obj\Debug\ImageClassifier.pdb
