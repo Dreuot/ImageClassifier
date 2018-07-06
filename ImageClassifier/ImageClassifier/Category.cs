@@ -8,10 +8,14 @@ using System.ComponentModel.DataAnnotations;
 namespace ImageClassifier
 {
     [Serializable]
-    class Category
+    public class Category
     {
         [Display(Name = "Категория")]
         public string Name { get; set; }
+
+        public Category()
+        {
+        }
 
         public Category(string name)
         {

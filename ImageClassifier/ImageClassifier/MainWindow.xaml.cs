@@ -31,15 +31,16 @@ namespace ImageClassifier
             InitializeComponent();
 
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string dataPath = ConfigurationManager.AppSettings["dataPath"];
+            string dataPath = config.AppSettings.Settings["dataPath"].Value;
+            string catPath = config.AppSettings.Settings["catPath"].Value;
             List<string> tracking = new List<string>();
-            var configKeys = ConfigurationManager.AppSettings.AllKeys.Where(key => key.IndexOf("tracking") == 0);
+            var configKeys = config.AppSettings.Settings.AllKeys.Where(key => key.IndexOf("tracking") == 0);
             foreach (var key in configKeys)
             {
-                tracking.Add(ConfigurationManager.AppSettings[key]);
+                tracking.Add(config.AppSettings.Settings[key].Value);
             }
 
-            repo = new Repo(dataPath, tracking);
+            repo = new Repo(dataPath, catPath, tracking);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -64,6 +65,9 @@ namespace ImageClassifier
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
+            
+            repo.AddCategoryToPicture(repo.Images[0], "Проверка");
+            repo.Save();
             var r = 2;
         }
     }

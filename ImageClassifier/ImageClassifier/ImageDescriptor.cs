@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace ImageClassifier
 {
     [Serializable]
-    class ImageDescriptor
+    public class ImageDescriptor
     {
         [XmlIgnore]
         public Image Picture { get; set; }

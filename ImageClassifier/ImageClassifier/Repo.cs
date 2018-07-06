@@ -8,49 +8,84 @@ using System.Xml.Serialization;
 
 namespace ImageClassifier
 {
-    class Repo
+    public class Repo
     {
         private string dataPath;
+        private string catPath;
         public List<string> TrackingDirs { get; set; }
-        public List<Category> categories;
+        public List<Category> Categories;
         public List<ImageDescriptor> Images { get; set; }
 
-        public Repo(string dataPath, IEnumerable<string> trackingDirs)
+        public Repo(string dataPath, string catPath, IEnumerable<string> trackingDirs)
         {
             this.dataPath = dataPath;
+            this.catPath = catPath;
             TrackingDirs = trackingDirs.ToList();
             Images = new List<ImageDescriptor>();
-            //Load();
+            Load();
+            //Reload();
+        }
+
+        private void Reload()
+        {
+            Images = new List<ImageDescriptor>();
             foreach (var item in TrackingDirs)
             {
                 Read(item);
             }
         }
 
-        private void Save()
+        public void Save()
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(ImageDescriptor));
-            using (FileStream writter = new FileStream(dataPath, FileMode.Create))
-            {
-                serializer.Serialize(writter, Images);
-            }
-        }
-
-        private void Load()
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(ImageDescriptor));
             try
             {
-                using (FileStream writter = new FileStream(dataPath, FileMode.Open))
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ImageDescriptor>));
+                using (FileStream writter = new FileStream(dataPath, FileMode.Create))
                 {
-                    Images = (List<ImageDescriptor>)serializer.Deserialize(writter);
+                    serializer.Serialize(writter, Images);
+                }
+
+                serializer = new XmlSerializer(typeof(List<Category>));
+                using (FileStream stream = new FileStream(catPath, FileMode.Create))
+                {
+                    serializer.Serialize(stream, Categories);
                 }
             }
-            catch (Exception e)
+            catch (Exception ex) 
             {
+
                 throw;
             }
             
+        }
+
+        public void Load()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<ImageDescriptor>));
+            try
+            {
+                using (FileStream writter = new FileStream(dataPath, FileMode.OpenOrCreate))
+                {
+                    Images = (List<ImageDescriptor>)serializer.Deserialize(writter) ?? new List<ImageDescriptor>();
+                }
+            }
+            catch (Exception)
+            {
+                Images = new List<ImageDescriptor>();
+            }
+
+            try
+            {
+                serializer = new XmlSerializer(typeof(List<Category>));
+                using (FileStream stream = new FileStream(catPath, FileMode.Open))
+                {
+                    Categories = (List<Category>)serializer.Deserialize(stream);
+                }
+            }
+            catch (Exception)
+            {
+                Categories = new List<Category>();
+            }
         }
 
         private void Read(string path)
@@ -59,8 +94,8 @@ namespace ImageClassifier
             {
                 DirectoryInfo dir = new DirectoryInfo(path);
                 var files = dir.GetFiles("*.jpg", SearchOption.AllDirectories);
-                files.Concat(dir.GetFiles("*.jpeg", SearchOption.AllDirectories));
-                files.Concat(dir.GetFiles("*.png", SearchOption.AllDirectories));
+                files = files.Concat(dir.GetFiles("*.jpeg", SearchOption.AllDirectories)).ToArray();
+                files = files.Concat(dir.GetFiles("*.png", SearchOption.AllDirectories)).ToArray();
                 foreach (var file in files)
                 {
                     ImageDescriptor img = new ImageDescriptor(file.FullName, path, file.Name);
@@ -93,23 +128,23 @@ namespace ImageClassifier
 
         public Category GetCategory(string name)
         {
-            var category = categories.FirstOrDefault(c => c.Name == name);
+            var category = Categories.FirstOrDefault(c => c.Name == name);
             if (category == null)
             {
                 category = new Category(name);
-                categories.Add(category);
+                Categories.Add(category);
                 Save();
             }
 
             return category;
         }
 
-        public void AddCategoryAtPicture(ImageDescriptor image, Category category)
+        public void AddCategoryToPicture(ImageDescriptor image, Category category)
         {
             image.AddCategory(category);
         }
 
-        public void AddCategoryAtPicture(ImageDescriptor image, string categoryName)
+        public void AddCategoryToPicture(ImageDescriptor image, string categoryName)
         {
             var category = GetCategory(categoryName);
             image.AddCategory(category);

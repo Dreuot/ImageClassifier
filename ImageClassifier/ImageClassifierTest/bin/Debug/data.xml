@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ArrayOfImageDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ImageDescriptor>
+    <Path>C:\Users\akarpov\Desktop\Images\14143214197648.jpg</Path>
+    <Name>14143214197648.jpg</Name>
+    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
+    <Categories />
+  </ImageDescriptor>
+  <ImageDescriptor>
+    <Path>C:\Users\akarpov\Desktop\Images\world-of-warcraft-wow-fon.jpg</Path>
+    <Name>world-of-warcraft-wow-fon.jpg</Name>
+    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
+    <Categories />
+  </ImageDescriptor>
+  <ImageDescriptor>
+    <Path>C:\Users\akarpov\Desktop\Images\Коллеги.jpg</Path>
+    <Name>Коллеги.jpg</Name>
+    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
+    <Categories />
+  </ImageDescriptor>
+  <ImageDescriptor>
+    <Path>C:\Users\akarpov\Desktop\Images\Коллеги.png</Path>
+    <Name>Коллеги.png</Name>
+    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
+    <Categories />
+  </ImageDescriptor>
+</ArrayOfImageDescriptor>
