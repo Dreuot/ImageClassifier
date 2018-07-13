@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <ArrayOfImageDescriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ImageDescriptor>
-    <Path>C:\Users\akarpov\Desktop\Images\14143214197648.jpg</Path>
-    <Name>14143214197648.jpg</Name>
-    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
+    <Path>C:\Users\Андрей\Desktop\WEB\23.JPG</Path>
+    <Name>23.JPG</Name>
+    <TrackingDir>C:\Users\Андрей\Desktop\WEB</TrackingDir>
     <Categories>
       <Category>
         <Name>Проверка</Name>
@@ -11,21 +11,9 @@
     </Categories>
   </ImageDescriptor>
   <ImageDescriptor>
-    <Path>C:\Users\akarpov\Desktop\Images\world-of-warcraft-wow-fon.jpg</Path>
-    <Name>world-of-warcraft-wow-fon.jpg</Name>
-    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
-    <Categories />
-  </ImageDescriptor>
-  <ImageDescriptor>
-    <Path>C:\Users\akarpov\Desktop\Images\Коллеги.jpg</Path>
-    <Name>Коллеги.jpg</Name>
-    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
-    <Categories />
-  </ImageDescriptor>
-  <ImageDescriptor>
-    <Path>C:\Users\akarpov\Desktop\Images\Коллеги.png</Path>
-    <Name>Коллеги.png</Name>
-    <TrackingDir>C:\Users\akarpov\Desktop\Images</TrackingDir>
+    <Path>C:\Users\Андрей\Desktop\WEB\Снимок.JPG</Path>
+    <Name>Снимок.JPG</Name>
+    <TrackingDir>C:\Users\Андрей\Desktop\WEB</TrackingDir>
     <Categories />
   </ImageDescriptor>
 </ArrayOfImageDescriptor>

@@ -13,7 +13,7 @@ namespace ImageClassifier
         private string dataPath;
         private string catPath;
         public List<string> TrackingDirs { get; set; }
-        public List<Category> Categories;
+        public List<Category> Categories { get; set; }
         public List<ImageDescriptor> Images { get; set; }
 
         public Repo(string dataPath, string catPath, IEnumerable<string> trackingDirs)
@@ -23,7 +23,6 @@ namespace ImageClassifier
             TrackingDirs = trackingDirs.ToList();
             Images = new List<ImageDescriptor>();
             Load();
-            //Reload();
         }
 
         private void Reload()
@@ -31,8 +30,30 @@ namespace ImageClassifier
             Images = new List<ImageDescriptor>();
             foreach (var item in TrackingDirs)
             {
-                Read(item);
+                ReadTrackedDir(item);
             }
+        }
+
+        public List<ImageDescriptor> GetImages(params Category[] categories)
+        {
+            if (categories.Length == 0)
+                return Images;
+
+            List<ImageDescriptor> result = new List<ImageDescriptor>();
+            bool have = true;
+            foreach (var image in Images)
+            {
+                foreach (var category in categories)
+                    if (image.Categories.All(c => c != category))
+                        have = false;
+
+                if (have)
+                    result.Add(image);
+
+                have = true;
+            }
+
+            return result;
         }
 
         public void Save()
@@ -88,7 +109,7 @@ namespace ImageClassifier
             }
         }
 
-        private void Read(string path)
+        private void ReadTrackedDir(string path)
         {
             try
             {
@@ -99,7 +120,6 @@ namespace ImageClassifier
                 foreach (var file in files)
                 {
                     ImageDescriptor img = new ImageDescriptor(file.FullName, path, file.Name);
-                    img.LoadImage();
                     Images.Add(img);
                 }
             }
@@ -107,23 +127,39 @@ namespace ImageClassifier
             {
                 throw;
             }
-            
+        }
+
+        public void RenameImage(ImageDescriptor img, string name)
+        {
+            img.Name = name;
+            Save();
         }
 
         private void RemoveUntracked(string path)
         {
-
+            for (int i = 0; i < Images.Count; i++)
+            {
+                ImageDescriptor current = Images[i];
+                if (!TrackingDirs.Any(n => n == current.TrackingDir))
+                {
+                    Images.Remove(current);
+                }
+            }
         }
 
         public void AddTracking(string path)
         {
             TrackingDirs.Add(path);
-            Read(path);
+            ReadTrackedDir(path);
+            Save();
         }
 
         public void RemoveWatching(string path)
         {
             TrackingDirs.Remove(path);
+            RemoveUntracked(path);
+
+            Save();
         }
 
         public Category GetCategory(string name)
@@ -142,12 +178,30 @@ namespace ImageClassifier
         public void AddCategoryToPicture(ImageDescriptor image, Category category)
         {
             image.AddCategory(category);
+            Save();
         }
 
         public void AddCategoryToPicture(ImageDescriptor image, string categoryName)
         {
             var category = GetCategory(categoryName);
             image.AddCategory(category);
+            Save();
+        }
+
+        public void RemoveCategoryFromPicture(ImageDescriptor image, Category category)
+        {
+            image.RemoveCategory(category);
+            Save();
+        }
+
+        public void RemoveCategoryFromPicture(ImageDescriptor image, string categoryName)
+        {
+            var category = Categories.FirstOrDefault(n => n.Name == categoryName);
+            if (category != null)
+            {
+                image.RemoveCategory(category);
+                Save();
+            }
         }
     }
 }

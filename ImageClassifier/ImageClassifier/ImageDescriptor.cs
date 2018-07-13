@@ -11,8 +11,8 @@ namespace ImageClassifier
     [Serializable]
     public class ImageDescriptor
     {
-        [XmlIgnore]
-        public Image Picture { get; set; }
+        //[XmlIgnore]
+        //public Image Picture { get; set; }
         public string Path { get; set; }
         public string Name { get; set; }
         public string TrackingDir { get; set; }
@@ -37,23 +37,26 @@ namespace ImageClassifier
             Name = name;
             TrackingDir = trackingDir;
             Categories = new List<Category>();
-            Picture = Image.FromFile(path);
+            //Picture = Image.FromFile(path);
         }
 
-        public void LoadImage()
-        {
-            Picture = Image.FromFile(Path);
-        }
+        //public void LoadImage()
+        //{
+        //    Picture = Image.FromFile(Path);
+        //}
 
         public void AddCategory(Category category)
         {
-            Categories.Add(category);
+            if (!Categories.Any(c => c == category))
+            {
+                Categories.Add(category);
+            }
         }
 
-        public void AddCategoryRange(IEnumerable<Category> categories)
-        {
-            Categories.AddRange(categories);
-        }
+        //public void AddCategoryRange(IEnumerable<Category> categories)
+        //{
+        //    Categories.AddRange(categories);
+        //}
 
         public void RemoveCategory(Category category)
         {
